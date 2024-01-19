@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>jdt.ls-java-project</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Contractor.java</name>
+			<type>1</type>
+			<location>//home/runner/cisc349-1st-assigmnet/Contractor.java</location>
+		</link>
+		<link>
+			<name>src/Employee.java</name>
+			<type>1</type>
+			<location>/home/runner/cisc349-1st-assigmnet/Employee.java</location>
+		</link>
+		<link>
+			<name>src/FT_Salary.java</name>
+			<type>1</type>
+			<location>//home/runner/cisc349-1st-assigmnet/FT_Salary.java</location>
+		</link>
+		<link>
+			<name>src/Main.java</name>
+			<type>1</type>
+			<location>/home/runner/cisc349-1st-assigmnet/Main.java</location>
+		</link>
+		<link>
+			<name>src/PT_Salary.java</name>
+			<type>1</type>
+			<location>//home/runner/cisc349-1st-assigmnet/PT_Salary.java</location>
+		</link>
+	</linkedResources>
+</projectDescription>
