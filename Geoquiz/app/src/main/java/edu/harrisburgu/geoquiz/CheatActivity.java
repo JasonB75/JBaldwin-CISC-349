@@ -1,0 +1,48 @@
+package edu.harrisburgu.geoquiz;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+
+public class CheatActivity extends AppCompatActivity {
+    private boolean mAnswerIsTrue;
+    private TextView mAnswerTextView;
+    private Button mShowAnswer;
+    private static final String EXTRA_ANSWER_IS_TRUE = "edu.harrisburgu.geoquiz.answer_is_true";
+    private static final String RESULT_OKAY = "edu.harrisburgu.geoquiz.RESULT_OKAY";
+    public static Intent newIntent(Context packageContext, Class<CheatActivity> answerIsTrue, boolean b) {
+        Intent i = new Intent(packageContext, CheatActivity.class);
+        i.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
+        return i;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cheat);
+        mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
+        mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
+        mShowAnswer = (Button) findViewById(R.id.show_answer_button);
+
+        mShowAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if (mAnswerIsTrue) {
+                    mAnswerTextView.setText("True");
+                } else {
+                    mAnswerTextView.setText("False");
+                }
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+            }
+        });
+    }
+}
