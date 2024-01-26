@@ -62,7 +62,7 @@ public class geoquiz extends AppCompatActivity {
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent i  = CheatActivity.newIntent(geoquiz.this, CheatActivity.class, mQuestionBank[mCurrentIndex].ismAnswerTrue());
+                Intent i  = CheatActivity.newIntent(geoquiz.this, mQuestionBank[mCurrentIndex].ismAnswerTrue());
                 String message = "hello from mainactivity";
                 i.putExtra(EXTRA_MESSAGE, message);
                 startActivityForResult(i, REQUEST_CODE_CHEAT);
@@ -79,6 +79,7 @@ public class geoquiz extends AppCompatActivity {
         });
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_View);
+        updateQuestion();
 
 
     }
@@ -96,7 +97,6 @@ public class geoquiz extends AppCompatActivity {
         }
 
     }
-
     private void updateQuestion(){
         int question = mQuestionBank[mCurrentIndex].getmTextResId();
         mQuestionTextView.setText(question);

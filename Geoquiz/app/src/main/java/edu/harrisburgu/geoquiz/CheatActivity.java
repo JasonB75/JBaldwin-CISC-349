@@ -17,7 +17,7 @@ public class CheatActivity extends AppCompatActivity {
     private Button mShowAnswer;
     private static final String EXTRA_ANSWER_IS_TRUE = "edu.harrisburgu.geoquiz.answer_is_true";
     private static final String RESULT_OKAY = "edu.harrisburgu.geoquiz.RESULT_OKAY";
-    public static Intent newIntent(Context packageContext, Class<CheatActivity> answerIsTrue, boolean b) {
+    public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
         Intent i = new Intent(packageContext, CheatActivity.class);
         i.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
         return i;
