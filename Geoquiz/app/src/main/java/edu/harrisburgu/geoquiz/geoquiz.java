@@ -44,12 +44,12 @@ public class geoquiz extends AppCompatActivity {
 
     private static final int REQUEST_CODE_CHEAT = 0;
 
-    private Question[] mQuestionBank = new Question[] {
+    private Question[] mQuestionBank = new Question[] {                   // the question bank
             new Question(R.string.question_australia, true),
             new Question(R.string.question_atlantic, false),
             new Question(R.string.question_taiwan, true),
     };
-    private int mCurrentIndex = 0;
+    private int mCurrentIndex = 0; // the index of the current question in the above bank
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -131,6 +131,7 @@ public class geoquiz extends AppCompatActivity {
         }
 
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
