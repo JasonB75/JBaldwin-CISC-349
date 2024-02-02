@@ -4,7 +4,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +25,20 @@ public class geoquiz extends AppCompatActivity {
     private Button mCheatButton;
     private Button mNextButton;
 
+    private SharedPreferences prefs;
+
+    private SharedPreferences.Editor editor;
+
+    private int totalCount;
+    private int score;
+
+    private static final String SCORE_KEY = "SCORE";
+    private static final String INDEX_KEY = "INDEX";
+    private static final String PLAYED_KEY = "PLAYED";
+    private TextView mScoreView;
+
+    private TextView mPlayedView;
+
     private TextView mQuestionTextView;
     private static final String EXTRA_MESSAGE = "edu.harrisburgu.geoquiz.cheatmessage";
 
@@ -38,8 +54,6 @@ public class geoquiz extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geo_quiz);
 
@@ -79,6 +93,26 @@ public class geoquiz extends AppCompatActivity {
         });
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_View);
+        mScoreView = (TextView) findViewById(R.id.score_text_view);
+        mPlayedView = (TextView) findViewById(R.id.played_text_view);
+
+        prefs = getPreferences(Context.MODE_PRIVATE);
+        editor = prefs.edit();
+
+        if (savedInstanceState == null){
+            totalCount = prefs.getInt(PLAYED_KEY, 0);
+            totalCount++;
+            editor.putInt(PLAYED_KEY, totalCount);
+            editor.commit();
+        } else {
+            mCurrentIndex = savedInstanceState.getInt(INDEX_KEY, 0);
+            score = savedInstanceState.getInt(SCORE_KEY, 0);
+            totalCount = prefs.getInt(PLAYED_KEY, 0);
+        }
+
+        mPlayedView.setText(Integer.toString(totalCount));
+        mScoreView.setText(Integer.toString(score));
+
         updateQuestion();
 
 
@@ -97,6 +131,14 @@ public class geoquiz extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(PLAYED_KEY, totalCount);
+        savedInstanceState.putInt(SCORE_KEY, score);
+        savedInstanceState.putInt(INDEX_KEY, mCurrentIndex);
+    }
     private void updateQuestion(){
         int question = mQuestionBank[mCurrentIndex].getmTextResId();
         mQuestionTextView.setText(question);
@@ -107,9 +149,13 @@ public class geoquiz extends AppCompatActivity {
         int messageResId = 0;
     if (userPressedTrue == answerIsTrue){
         messageResId = R.string.correct_toast;
+        score++;
+        mScoreView.setText(Integer.toString(score));
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     } else{
         messageResId = R.string.incorrect_toast;
+        score--;
+        mScoreView.setText(Integer.toString(score));
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
     }

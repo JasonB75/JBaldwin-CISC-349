@@ -15,4 +15,6 @@
     <string name="question_australia">Australea is its own continent</string>
     <string name="question_atlantic">The Atlantic ocean is the largest ocean</string>
     <string name="question_taiwan">Taiwan is an independent country</string>
+    <string name="score">"Score: "</string>
+    <string name="played_text">"Plays: "</string>
 </resources>
