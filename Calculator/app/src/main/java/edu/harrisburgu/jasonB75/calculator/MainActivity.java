@@ -5,13 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     //num1
+    private String num1 = " ";
     //num2
+    private String num2 = " ";
     //has decimal
+    private boolean hasDecimal;
 
+    // is op selected
+    private boolean isOpSelected; // The boolean that checks to see if an operator is selected.
+
+    private String operationSelected; //the String that holds the operation selected for the experesion
+
+    private boolean operatorSelected = false;
+
+
+    //button variables
     private Button button_0;
     private Button button_1;
     private Button button_2;
@@ -30,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private Button button_del;
     private Button button_dot;
 
+    private TextView display_text;
+
+    private Button[] op_buttons;
 
 
 
@@ -59,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
         button_equals = (Button) findViewById(R.id.button_equal);;
         button_del = (Button) findViewById(R.id.button_del);;
 
+        op_buttons = new Button[] {button_plus, button_minus, button_multiply, button_divide};
+
+        display_text = (TextView) findViewById(R.id.display_text_view);
 
         button_0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,46 +139,59 @@ public class MainActivity extends AppCompatActivity {
                 proccess_number_button_click("9");
             }
         });
-        button_0.setOnClickListener(new View.OnClickListener() {
+        button_dot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                proccess_number_button_click("0");
+                proccess_number_button_click(".");
             }
         });
-        button_0.setOnClickListener(new View.OnClickListener() {
+
+        //Operator buttons
+        button_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                proccess_number_button_click("0");
+                proccess_op_button_click("+");
             }
         });
-        button_0.setOnClickListener(new View.OnClickListener() {
+        button_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                proccess_number_button_click("0");
+                proccess_op_button_click("-");
             }
         });
-        button_0.setOnClickListener(new View.OnClickListener() {
+        button_multiply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                proccess_number_button_click("0");
+                proccess_op_button_click("*");
             }
         });
-        button_0.setOnClickListener(new View.OnClickListener() {
+        button_divide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                proccess_number_button_click("0");
+                proccess_op_button_click("/");
             }
         });
-        button_0.setOnClickListener(new View.OnClickListener() {
+        button_equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                proccess_number_button_click("0");
+                proccess_op_button_click("Equals");
             }
         });
-        button_0.setOnClickListener(new View.OnClickListener() {
+
+        //On a long click of the equals button clear the calculator
+        button_equals.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                clear_calc();
+                return true;
+            }
+        });
+
+        ////deleting
+        button_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                proccess_number_button_click("0");
+                proccess_number_button_click("del");
             }
         });
 
@@ -167,11 +199,94 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void  proccess_number_button_click(String input){
+    private void clear_calc(){
+        num1 = " ";
+        num2 = " ";
+        isOpSelected = false;
+        display_text.setText("0");
+        change_op_button_color("not an operation so they'll all turn off lol");
+    }
+    private void display_num(int num){ // Displays the selected number to the text view, num indicates which number to display
+        if (num == 1){
+            display_text.setText(num1);
+        } else {
+            display_text.setText(num2);
+        }
 
     }
+    private void  proccess_number_button_click(String input){ // Name is explanatory, includes del operation because of existing diferentiation between num1 and 2
+        if (isOpSelected){ // If an operation has been selected process num2, otherwise num1
+            if (input.equals("del")) { // Deletes the last entered char if one exists
+                if (num2.length() >0){
+                    String temp = num2;
+                    num2 = temp.substring(0, temp.length() - 1);}// makes a substring of the num excluding the last char
+            } else {
+                num2 += input; // concats the input to the end of the string
+                if (input.equals(".")){ hasDecimal = true;}
+            }
+            display_num(2);
+        } else {
+            if (input.equals("del")) {// Deletes the last entered char if one exists
+                if (num1.length() > 0){
+                    String temp = num1;
+                    num1 = temp.substring(0, temp.length() - 1);} // makes a substring of the num excluding the last char
+            } else {
+            num1 += input; // concats the input to the end of the string
+            if (input.equals(".")){ hasDecimal = true;}
+            }
+            display_num(1);
+        }
+    }
+    // name is self explanatory, saves operation to variable, if
+    // if its the equals button it calls that function
     private void proccess_op_button_click(String input){
+        if (input.equals("Equals")){
+            process_operation();
+        } else {
+            operationSelected = input;
+            isOpSelected = true;
+            change_op_button_color(input);
+        }
+    }
+
+    //Takes the string input from an operation button and sets it to selected and unselects the rest
+    //op_buttons = {button_plus, button_minus, button_multiply, button_divide}
+    private void change_op_button_color(String input){
+        String[] operations =  {"+","-","*","/"};
+
+        for (int i = 0; i<4; i++){
+            if (input.equals(operations[i])){
+                op_buttons[i].setSelected(true);
+            } else {
+                op_buttons[i].setSelected(false);
+            }        }
 
 
     }
-}
+
+    // Turns the string numbers to doubles,
+    private void process_operation(){
+
+        if (num1 != null && num2 != null) {
+            double final_Number1 = Double.parseDouble(num1);
+            double final_Number2 = Double.parseDouble(num2);
+            double output = 0;
+
+            if (operationSelected.equals("+")) {
+                output = final_Number1 + final_Number2;
+            } else if (operationSelected.equals("-")) {
+                output = final_Number1 - final_Number2;
+            } else if (operationSelected.equals("*")) {
+                output = final_Number1 * final_Number2;
+            } else if (operationSelected.equals("/")) {
+                output = final_Number1 / final_Number2;
+            }
+            num1 = Double.toString(output);
+            num2 = " ";
+            display_num(1);
+            }
+
+        }
+
+
+    }
