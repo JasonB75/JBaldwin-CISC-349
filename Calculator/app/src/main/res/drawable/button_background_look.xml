@@ -6,8 +6,14 @@
     <!--When Button is in selected state -->
     <item android:state_selected="true" android:color="#fabcff" android:shape="rectangle" android:radius="15dp"/>
     <!--Default Background Color -->
-    <item android:color="#3F51B5" android:shape="rectangle" android:radius="10dp"/>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#B53F4D"/>
+            <corners android:radius="1dp" />
+
+        </shape>
+    </item>
 
 </selector>
-<!-- code modified from https://www.geeksforgeeks.org/how-to-change-the-background-color-of-button-in-android-using-colorstatelist/ -->
+    <!-- code modified from https://www.geeksforgeeks.org/how-to-change-the-background-color-of-button-in-android-using-colorstatelist/ -->
 
