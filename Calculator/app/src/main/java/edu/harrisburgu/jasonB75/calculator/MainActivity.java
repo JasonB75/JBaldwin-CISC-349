@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    //num1
+    //num1 both nums hold the string version of the user inputted numbers
     private String num1 = " ";
     //num2
     private String num2 = " ";
@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean isOpSelected; // The boolean that checks to see if an operator is selected.
 
     private String operationSelected; //the String that holds the operation selected for the experesion
-
-    private boolean operatorSelected = false;
 
 
     //button variables
@@ -43,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private Button button_del;
     private Button button_dot;
 
-    private TextView display_text;
+    private TextView display_text; // The calculator display text view
 
-    private Button[] op_buttons;
+    private Button[] op_buttons; // Holds the operator button variables for ease of use in function proccessing
 
 
 
@@ -75,10 +73,11 @@ public class MainActivity extends AppCompatActivity {
         button_equals = (Button) findViewById(R.id.button_equal);;
         button_del = (Button) findViewById(R.id.button_del);;
 
-        op_buttons = new Button[] {button_plus, button_minus, button_multiply, button_divide};
+        op_buttons = new Button[] {button_plus, button_minus, button_multiply, button_divide}; // Holds the operator button variables for ease of use in function proccessing
 
-        display_text = (TextView) findViewById(R.id.display_text_view);
+        display_text = (TextView) findViewById(R.id.display_text_view); // The calculator display text view
 
+        /// All of the button on click listeners, most if not all direct to applicable functions
         button_0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -199,14 +198,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void clear_calc(){
-        num1 = " ";
+    private void clear_calc(){ // called when the calculator is being cleared
+        num1 = " "; // Sets both num strings to emtpy states
         num2 = " ";
-        isOpSelected = false;
-        display_text.setText("0");
+        isOpSelected = false; // Makes it so an operation is not selected
+        display_text.setText("0"); // and resets the display text and operator button color
         change_op_button_color("not an operation so they'll all turn off lol");
     }
-    private void display_num(int num){ // Displays the selected number to the text view, num indicates which number to display
+    private void display_num(int num){ //Displays the selected number to the text view, num indicates which number to display
         if (num == 1){
             display_text.setText(num1);
         } else {
@@ -214,21 +213,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    private void  proccess_number_button_click(String input){ // Name is explanatory, includes del operation because of existing diferentiation between num1 and 2
+    private void  proccess_number_button_click(String input){ // Name is explanatory, includes del operation because of existing differentiation between num1 and 2 (and not repeating code)
         if (isOpSelected){ // If an operation has been selected process num2, otherwise num1
             if (input.equals("del")) { // Deletes the last entered char if one exists
                 if (num2.length() >0){
-                    String temp = num2;
+                    String temp = num2; // uses temp variable to negate bug
                     num2 = temp.substring(0, temp.length() - 1);}// makes a substring of the num excluding the last char
             } else {
                 num2 += input; // concats the input to the end of the string
                 if (input.equals(".")){ hasDecimal = true;}
             }
-            display_num(2);
+            display_num(2); // Display the new number
         } else {
             if (input.equals("del")) {// Deletes the last entered char if one exists
                 if (num1.length() > 0){
-                    String temp = num1;
+                    String temp = num1;// uses temp variable to negate bug
                     num1 = temp.substring(0, temp.length() - 1);} // makes a substring of the num excluding the last char
             } else {
             num1 += input; // concats the input to the end of the string
@@ -237,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             display_num(1);
         }
     }
-    // name is self explanatory, saves operation to variable, if
+    // name is self explanatory, saves operation to variable,
     // if its the equals button it calls that function
     private void proccess_op_button_click(String input){
         if (input.equals("Equals")){
@@ -252,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Takes the string input from an operation button and sets it to selected and unselects the rest
+    //Takes the string input from an operation button and sets it to selected(so the color changes) and unselects the rest
     //op_buttons = {button_plus, button_minus, button_multiply, button_divide}
     private void change_op_button_color(String input){
         String[] operations =  {"+","-","*","/"};
@@ -268,6 +267,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Turns the string numbers to doubles,
+    //reads the operator selected and preforms the equation on the converted numbers
+    //Then sets the new number to num1 so that the calculations can continue
     private void process_operation(){
 
         if (num1 != null && num2 != null) {
@@ -287,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
             num1 = Double.toString(output);
             num2 = " ";
             display_num(1);
+            change_op_button_color("not an operation so they'll all turn off lol");
             }
 
         }
