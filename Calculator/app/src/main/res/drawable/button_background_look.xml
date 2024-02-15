@@ -8,12 +8,11 @@
     <!--Default Background Color -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#B53F4D"/>
-            <corners android:radius="1dp" />
-
+            <solid android:color="#1C171C" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
 
+
 </selector>
     <!-- code modified from https://www.geeksforgeeks.org/how-to-change-the-background-color-of-button-in-android-using-colorstatelist/ -->
-

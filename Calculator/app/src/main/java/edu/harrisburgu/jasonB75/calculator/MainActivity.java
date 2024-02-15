@@ -246,6 +246,9 @@ public class MainActivity extends AppCompatActivity {
             operationSelected = input;
             isOpSelected = true;
             change_op_button_color(input);
+            if (num1 == null){
+                num1 = "0";
+            }
         }
     }
 
