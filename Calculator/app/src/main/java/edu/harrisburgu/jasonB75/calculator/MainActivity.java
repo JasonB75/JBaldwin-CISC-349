@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
     // name is self explanatory, saves operation to variable,
     // if its the equals button it calls that function
     private void proccess_op_button_click(String input){
-        if (input.equals("Equals")){
+        if ((input.equals("Equals")) || (isOpSelected && !num2.equals(" "))){
             process_operation();
         } else {
             operationSelected = input;
@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
     //Then sets the new number to num1 so that the calculations can continue
     private void process_operation(){
 
-        if (num1 != null && num2 != null) {
+        if (!num1.equals(" ") && !num2.equals(" ") && isOpSelected) {
             double final_Number1 = Double.parseDouble(num1);
             double final_Number2 = Double.parseDouble(num2);
             double output = 0;
