@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LoginThree</string>
+    <string name="welcome_to_the_login_text">Welcome to the Login!</string>
+    <string name="login_textview_text">Login</string>
+    <string name="username_text">Username</string>
+    <string name="password_text">password</string>
+    <string name="button_text">Login</string>
+    <string name="loginsuccess">Login Successfull</string>
+    <string name="logingbad">Login not Successfull</string>
+</resources>
