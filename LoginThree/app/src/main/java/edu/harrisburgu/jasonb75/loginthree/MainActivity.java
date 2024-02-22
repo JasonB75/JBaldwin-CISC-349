@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
+                Log.d("CLICK", "login buttin clicked");
                 String username = usernameText.getText().toString();
                 String password = passwordText.getText().toString();
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 //JSONArrayRequest
                 JsonRequest jsonRequest =
                         new JsonRequest(Request.Method.POST,
-                                "http://127.0.0.1:5000/login", null,
+                                "http://10.0.0.146:5000/login", null,
                                 new Response.Listener<JSONObject>() {
                                     @Override
                                     public void onResponse(JSONObject response) {
