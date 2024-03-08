@@ -51,46 +51,46 @@ public class MainActivity extends AppCompatActivity {
                 String data = String.format("{ \"username\":\"%s\"password\":\"%s\"}", username, password);
 
                 //JSONArrayRequest
-                JsonRequest jsonRequest =
-                        new JsonRequest(Request.Method.POST,
-                                "http://10.0.0.146:5000/login", null,
-                                new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        try {
-                                            boolean success = response.getBoolean("login");
-                                            Log.d("JSONObject Response", "Success: " +
-                                                    success);
-                                            if (success){
-                                                Toast.makeText(v.getContext(), R.string.loginsuccess, Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(v.getContext(), R.string.logingbad, Toast.LENGTH_SHORT).show();
-                                            }
-                                        } catch (JSONException e) {
-                                            throw new RuntimeException(e);
-                                        }
-
-                                    }
-                                }, new Response.ErrorListener() {
+                JsonRequest jsonRequest;
+                jsonRequest = new JsonRequest(Request.Method.POST,
+                        "http://10.0.0.146:5000/login", null,
+                        new Response.Listener<JSONObject>() {
                             @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("JSONArray Error", "Error:" + error);
-                            }
-                        }) {
-                            @Override
-                            protected Response parseNetworkResponse(NetworkResponse respose){
-                                String data = new String(respose.data);
+                            public void onResponse(JSONObject response) {
                                 try {
-                                    JSONObject json = new JSONObject(data);
-                                    Response<JSONObject> res  = Response.success(json, null);
-                                    Log.d("Login", "parseNetworkResponse called");
-                                    return res;
+                                    boolean success = response.getBoolean("login");
+                                    Log.d("JSONObject Response", "Success: " +
+                                            success);
+                                    if (success){
+                                        Toast.makeText(v.getContext(), R.string.loginsuccess, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(v.getContext(), R.string.logingbad, Toast.LENGTH_SHORT).show();
+                                    }
                                 } catch (JSONException e) {
                                     throw new RuntimeException(e);
                                 }
-                            }
 
-                        };
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("JSONArray Error", "Error:" + error);
+                    }
+                }) {
+                    @Override
+                    protected Response parseNetworkResponse(NetworkResponse respose){
+                        String data = new String(respose.data);
+                        try {
+                            JSONObject json = new JSONObject(data);
+                            Response<JSONObject> res  = Response.success(json, null);
+                            Log.d("Login", "parseNetworkResponse called");
+                            return res;
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                };
                 queue.add(jsonRequest);
             }
         });
