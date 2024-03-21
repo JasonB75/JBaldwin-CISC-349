@@ -1,5 +1,8 @@
 package edu.harrisburgu.jasonb75.dynamiclist;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class HolidaySongs {
     private String album_img;
     private String playlist_img;
@@ -8,10 +11,18 @@ public class HolidaySongs {
     private Double danceability;
     private Integer duration_ms;
 
-    public String getAlbum_img() {
-        return album_img;
+    public HolidaySongs(JSONObject object) throws JSONException{
+        this.album_img = object.getString("album_img");
+        this.playlist_img = object.getString("playlist_img");
+        this.album_name = object.getString("album_name");
+        this.artist_name = object.getString("artist_name");
+        this.danceability = object.getDouble("danceability");
+        this.duration_ms = object.getInt("duration_ms");
+
     }
 
+
+    //Setters
     public void setAlbum_img(String album_img) {
         this.album_img = album_img;
     }
@@ -27,33 +38,26 @@ public class HolidaySongs {
     public void setArtist_name(String artist_name) {
         this.artist_name = artist_name;
     }
-    
-    public String getPlaylist_img() {
-        return playlist_img;
-    }
-
-
-
-    public String getAlbum_name() {
-        return album_name;
-    }
-
-
-
-    public String getArtist_name() {
-        return artist_name;
-    }
-
-
-
-    public Double getDanceability() {
-        return danceability;
-    }
-
     public void setDanceability(Double danceability) {
         this.danceability = danceability;
     }
 
+    //Getters
+    public String getPlaylist_img() {
+        return playlist_img;
+    }
+    public String getAlbum_img() {
+        return album_img;
+    }
+    public String getAlbum_name() {
+        return album_name;
+    }
+    public String getArtist_name() {
+        return artist_name;
+    }
+    public Double getDanceability() {
+        return danceability;
+    }
     public Integer getDuration_ms() {
         return duration_ms;
     }
