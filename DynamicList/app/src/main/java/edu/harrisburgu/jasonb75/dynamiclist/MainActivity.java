@@ -3,9 +3,13 @@ package edu.harrisburgu.jasonb75.dynamiclist;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -77,6 +81,20 @@ public class MainActivity extends AppCompatActivity {
 
         queue.add(jsonArrayRequest);
 
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                HolidaySongs value =(HolidaySongs) adapter.getItem(position);
+                //Toast.makeText(getApplicationContext(),value.getAlbum_name(),Toast.LENGTH_SHORT).show();
+
+                Intent i  = ViewSongs.newIntent(view.getContext(), value);
+                String message = "hello from mainactivity";
+                //i.putExtra(EXTRA_MESSAGE, message);
+                startActivityForResult(i, 0);
+            }
+        });
 
     }
 }
