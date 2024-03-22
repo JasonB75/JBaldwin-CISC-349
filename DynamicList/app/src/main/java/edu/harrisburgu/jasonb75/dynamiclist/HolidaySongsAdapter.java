@@ -58,21 +58,23 @@ public class HolidaySongsAdapter extends BaseAdapter {
         //format the text for the duration text view
         int duration_min = (arrayList.get(position).getDuration_ms() / 1000) / 60;
         int duration_sec = (arrayList.get(position).getDuration_ms() / 1000) % 60;
-
         String duration_string = Integer.toString(duration_min) + Integer.toString(duration_sec);
 
+        //Bind the widgets
         albumName = convertView.findViewById(R.id.album_name);
         artistName = convertView.findViewById(R.id.artist_name);
         danceability = convertView.findViewById(R.id.danceability);
         duration = convertView.findViewById(R.id.duration);
         image = (NetworkImageView) convertView.findViewById(R.id.networkImageView);
 
+        //Set the text from the song object, and pull the img URL for use bellow
         albumName.setText(arrayList.get(position).getAlbum_name());
         artistName.setText(arrayList.get(position).getArtist_name());
         danceability.setText(dance_string);
         duration.setText(duration_string);
         String url = arrayList.get(position).getAlbum_img();
 
+        //Start a new request queue and setup an image loader for the playlist img
         RequestQueue queue = Volley.newRequestQueue(convertView.getContext());
         imageLoader = new ImageLoader(queue, new ImageLoader.ImageCache() {
             private final LruCache<String, Bitmap> mCache = new LruCache<String,

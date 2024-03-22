@@ -39,26 +39,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = findViewById(R.id.listView);
-        ArrayList<HolidaySongs> arrayOfSongs = new ArrayList<>();
+        listView = findViewById(R.id.listView); // The main list view for the main activity
+
+        ArrayList<HolidaySongs> arrayOfSongs = new ArrayList<>(); // An array to hold all of the song objects
 
         // Create the adapter to convert the array to views
-        HolidaySongsAdapter adapter = new HolidaySongsAdapter(this, arrayOfSongs);
+        HolidaySongsAdapter adapter = new HolidaySongsAdapter(this, arrayOfSongs); // The adapter for the list view, that has the array of songs
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this); // The start for volley
         queue.start();
 
-        JsonArrayRequest jsonArrayRequest =
+        JsonArrayRequest jsonArrayRequest = // The Volley request to get the JSON object from the url
                 new JsonArrayRequest(Request.Method.GET,
                         url, null,
 
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
-                                for (int i = 0; i < response.length(); i++){
+                                for (int i = 0; i < response.length(); i++){ // For each item in the array, add it as a song to the array
                                     try{
-                                        JSONObject obj = response.getJSONObject(i);
-                                        HolidaySongs song = new HolidaySongs(response.getJSONObject(i));
+                                        HolidaySongs song = new HolidaySongs(response.getJSONObject(i));//
                                         Log.d("New Song!", song.getAlbum_name());
                                         arrayOfSongs.add(song);
 
@@ -79,19 +79,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        queue.add(jsonArrayRequest);
+        queue.add(jsonArrayRequest); //Offically start the request
 
 
+        // When an item is clicked, get the item, and pass it via intent to the view song activity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 HolidaySongs value =(HolidaySongs) adapter.getItem(position);
                 //Toast.makeText(getApplicationContext(),value.getAlbum_name(),Toast.LENGTH_SHORT).show();
-
                 Intent i  = ViewSongs.newIntent(view.getContext(), value);
-                String message = "hello from mainactivity";
-                //i.putExtra(EXTRA_MESSAGE, message);
                 startActivityForResult(i, 0);
             }
         });
