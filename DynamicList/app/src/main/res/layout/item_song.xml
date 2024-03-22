@@ -4,22 +4,25 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/networkImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="image">
-    </TextView>
+        android:layout_centerHorizontal="true"
+        android:background="#000000"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="20sp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/album_name"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:text="Album Name">
         </TextView>
         <TextView

@@ -1,5 +1,7 @@
 package edu.harrisburgu.jasonb75.dynamiclist;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,6 +20,8 @@ public class HolidaySongs {
         this.artist_name = object.getString("artist_name");
         this.danceability = object.getDouble("danceability");
         this.duration_ms = object.getInt("duration_ms");
+
+        //Log.d("Object created!", this.album_name);
 
     }
 

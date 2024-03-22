@@ -11,7 +11,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -23,6 +25,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
+    private NetworkImageView image;
+    private ImageLoader imageLoader;
 
     protected static final String url = "https://nua.insufficient-light.com/data/holiday_songs_spotify.json";
 
@@ -33,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         ArrayList<HolidaySongs> arrayOfSongs = new ArrayList<>();
+
+        // Create the adapter to convert the array to views
+        HolidaySongsAdapter adapter = new HolidaySongsAdapter(this, arrayOfSongs);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.start();
@@ -55,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                 }
+
+                                // Attach the adapter to a ListView
+                                ListView listView = (ListView) findViewById(R.id.listView);
+                                listView.setAdapter(adapter);
+
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -64,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         queue.add(jsonArrayRequest);
+
 
     }
 }
