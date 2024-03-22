@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,14 +26,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String allCustomerURL = "http://127.0.0.1:5000/all";
-    private final String updateCustomerURL = "http://127.0.0.1:5000/update";
-    private final String addCustomerURL = "http://127.0.0.1:5000/add";
+    private final String allCustomerURL = "http://10.2.98.125:5000/all";
+    private final String updateCustomerURL = "http://10.2.98.125:5000/update";
+    private final String addCustomerURL = "http://10.2.98.125:5000/add";
 
     RequestQueue queue;
 
     List<Customer> customerList;
-    ListView list;
+    ListView listView;
 
 
 
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentManager fm = getSupportFragmentManager();
+        listView = findViewById(R.id.listview); // The main list view for the main activity
+        CustomerListAdapter adapter = new CustomerListAdapter(this, customerList); // The adapter for the list view
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.start();
@@ -65,15 +67,14 @@ public class MainActivity extends AppCompatActivity {
                                             customerList.add(customer);
                                             Log.d("New customer!:", customer.getName());
 
-                                            Fragment fragment = new CustomerFragment(customer);
-                                            fm.beginTransaction()
-                                                    .add(R.id.fragmentContainer, fragment)
-                                                    .commit();
+
                                         }
                                     } catch (JSONException e){
                                         e.printStackTrace();
                                     }
                                 }
+                                ListView listView = (ListView) findViewById(R.id.listview);
+                                listView.setAdapter(adapter);
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -88,19 +89,10 @@ public class MainActivity extends AppCompatActivity {
         addCustomerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = "george boi";
-                String phone = "717-777-9999";
-                String address = "666 School way, Harrisburg, PA";
-                JSONObject postData = new JSONObject();
-                try {
-                    postData.put("name", name);
-                    postData.put("phone", phone);
-                    postData.put("address", address);
-                    /*postData.put("name", name.getText().toString());
-                    postData.put("address", address.getText().toString());*/
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Intent i  = AddCustomer.newIntent(v.getContext(), queue);
+                String message = "hello from mainactivity";
+                //i.putExtra(EXTRA_MESSAGE, message);
+                startActivityForResult(i, 0);
             }
         });
 

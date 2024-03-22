@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">CustomerList2</string>
     <string name="add_customer">Add Customer</string>
+    <string name="Customer_address">Customer Address</string>
+    <string name="Customer_name">Customer Name</string>
+    <string name="Customer_comments">Comments\n</string>
+    <string name="add">Add</string>
+    <string name="Customer_phone">Customer Phone</string>
 </resources>

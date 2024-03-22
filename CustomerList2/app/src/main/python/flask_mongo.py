@@ -9,7 +9,7 @@ from flask import Flask
 app = Flask(__name__)
 
 client = MongoClient("mongodb+srv://jbaldwin:CBAE4VO2IAOtZjI9@cisc349.ni0blpr.mongodb.net/?retryWrites=true&w=majority&appName=CISC349")
-db = client["CISC349"]
+db = client["cisc349"]
  
 
 # A welcome message to test our server
@@ -25,9 +25,9 @@ def add():
     request_data = request.get_json()
     name = request_data['name']
     address = request_data['address']
-    phone = request._data['phone']
+    phone = request_data['phone']
     data = { "name": name, "address": address , "phone": phone}
-    _id = collection.insert_one(data) 
+    _id = collection.insert_one(request_data) 
     return json.dumps({'id' : str(_id.inserted_id)})
 
 @app.route('/update', methods=['POST'])
@@ -52,7 +52,7 @@ def update():
 
 # Select All users
 
-@app.route('/all', methods=['POST'])
+@app.route('/all', methods=['GET'])
 def all():
     collection = db["customers"] 
     customers = list(collection.find())
@@ -62,4 +62,4 @@ def all():
 
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run("0.0.0.0",port=5000)
