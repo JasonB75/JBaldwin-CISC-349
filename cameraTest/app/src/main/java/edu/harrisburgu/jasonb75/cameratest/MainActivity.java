@@ -3,21 +3,32 @@ package edu.harrisburgu.jasonb75.cameratest;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     BitmapDrawable drawable;
     Button captureButton;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         captureButton = findViewById(R.id.camera_button);
         imageView = findViewById(R.id.cameraImageView);
+        context = this;
 
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button listButton = findViewById(R.id.list_button);
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Camera Test", "List button clock");
+                Intent i = new Intent(MainActivity.this, ImageListView.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -83,15 +105,13 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String url = "http://10.1.121.45:5000/image";
+        String url = "http://10.2.98.125:5000/image";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, json,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("Hello", "Response: " + response.toString());
-                        Logger.d("hello");
-                        Logger.json(String.valueOf(response));
-                        Logger.e("error");
+
                     }
                 }, new Response.ErrorListener() {
             @Override
