@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HUstagram</string>
+    <string name="takePhotoButton">Take Photo</string>
+    <string name="commentHint">Comment</string>
+    <string name="uploadButton">Upload Image</string>
+    <string name="viewImagesButton">View Images</string>
+</resources>
