@@ -94,6 +94,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        viewImagesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("View image button clicked", "View image button clicked");
+                // inside on click listener we are creating a new intent
+                Intent i = GridViewActivity.newGridIntent(context);
+                // at last we are starting our activity.
+                context.startActivity(i);
+            }
+        });
+
+
     }
 
 
