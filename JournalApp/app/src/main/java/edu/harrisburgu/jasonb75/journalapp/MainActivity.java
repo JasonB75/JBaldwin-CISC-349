@@ -69,10 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
-
         timeEditText.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -90,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
+            }
+        });
+
+        moodPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+                //intend to new health collection
             }
         });
     }
