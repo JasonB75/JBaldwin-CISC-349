@@ -12,8 +12,14 @@ public class JournalEntry {
     private String comments;
     private Bitmap image;
 
-    public JournalEntry(int mood, String date, String time, int energy, int eaten, String comments, Bitmap image){
+    private int id; // THe id from the database
 
+    private boolean inDB; // whether the entry is in the database
+
+    public JournalEntry(int mood, String date, String time){
+        setMood(mood);
+        setDate(date);
+        setTime(time);
     }
 
 
@@ -71,5 +77,21 @@ public class JournalEntry {
 
     public void setImage(Bitmap image) {
         this.image = image;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isInDB() {
+        return inDB;
+    }
+
+    public void setInDB(boolean inDB) {
+        this.inDB = inDB;
     }
 }

@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -19,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private final int MOODMIN = 1;
     private EditText dateEditText, timeEditText;
     private NumberPicker moodPicker;
+    private Button nextButton;
+    private Context context;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
         dateEditText = findViewById(R.id.idEdtDate);
         timeEditText = findViewById(R.id.idEdtTime);
         moodPicker = findViewById(R.id.mood_picker);
+        nextButton = findViewById(R.id.next_button);
 
         moodPicker.setMaxValue(MOODMAX);
         moodPicker.setMinValue(MOODMIN);
+
+        context = this;
 
 
 
@@ -90,10 +101,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        moodPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        /*moodPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+
+            }
+        });*/
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 //intend to new health collection
+                int tempMood = moodPicker.getValue();
+                String tempDate = dateEditText.getText().toString();
+                String tempTime = timeEditText.getText().toString();
+                Intent i = HealthCollectionActivity.newIntent(context, tempDate, tempTime, tempMood);
+
+                // at last we are starting our activity.
+                context.startActivity(i);
             }
         });
     }

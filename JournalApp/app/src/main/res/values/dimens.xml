@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="health_layout_paddings">15dp</dimen>
+    <dimen name="header_text_size">25sp</dimen>
+    <dimen name="header_margin">20dp</dimen>
 </resources>
