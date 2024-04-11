@@ -28,11 +28,21 @@
             android:layout_height="wrap_content"
             android:text="@string/energy_level">
         </TextView>
-        <SeekBar
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/energy_bar">
+            android:id="@+id/energyTextView"
+            android:text="0"
+            android:layout_marginLeft="@dimen/display_textview_left">
+        </TextView>
+        <SeekBar
+            android:layout_width="@dimen/seekbar_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/display_seekview_left"
+            android:id="@+id/energySeekbar">
         </SeekBar>
+        
+
     </LinearLayout>
         
         
