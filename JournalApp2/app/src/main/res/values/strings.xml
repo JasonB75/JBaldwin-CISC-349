@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">JournalApp2</string>
+    <string name="how_we_doing">How we doing?</string>
+    <string name="date_text">Date:</string>
+    <string name="time_text">Time:</string>
+    <string name="how_have_things_been">How have things been?</string>
+    <string name="energy_level">Energy Level:</string>
+    <string name="next_button"><![CDATA[Next ->]]></string>
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="health_layout_paddings">15dp</dimen>
+    <dimen name="header_text_size">25sp</dimen>
+    <dimen name="header_margin">20dp</dimen>
+    <dimen name="display_textview_left">5dp</dimen>
+    <dimen name="display_seekview_left">8dp</dimen>
+    <dimen name="seekbar_width">210dp</dimen>
+</resources>
