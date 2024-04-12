@@ -91,6 +91,13 @@ public class HealthCollectionActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
             }
         });
+        //If the deleteimg button is clicked, set the imageview to transparent, effectivly deleting the image
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setImageResource(android.R.color.transparent);
+            }
+        });
 
     }
 
