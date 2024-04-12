@@ -16,5 +16,6 @@
     <string name="note_hint">Add Notes...</string>
     <string name="upload_image">Upload Image</string>
     <string name="delete_image">Delete Image</string>
+    <string name="save_entry">Save Entry!</string>
 
 </resources>

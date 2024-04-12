@@ -231,9 +231,17 @@
                 android:layout_width="@dimen/image_size"
                 android:layout_height="@dimen/image_size"
                 android:layout_marginStart="@dimen/img_margin_left"
+                android:id="@+id/imgView">
+            </ImageView>
 
 
         </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/finishEntryButton"
+            android:text="@string/save_entry">
+        </Button>
 
 
     </LinearLayout>
