@@ -12,5 +12,9 @@
     <string name="gut_feeling">Stomach/Gut feeling:</string>
     <string name="eaten">Hours since eating:</string>
     <string name="textview_default">0</string>
+    <string name="notes_text_view">Notes:</string>
+    <string name="note_hint">Add Notes...</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="delete_image">Delete Image</string>
 
 </resources>
