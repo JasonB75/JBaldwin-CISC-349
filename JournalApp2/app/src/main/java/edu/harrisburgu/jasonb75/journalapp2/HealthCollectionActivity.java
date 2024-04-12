@@ -34,24 +34,21 @@ public class HealthCollectionActivity extends AppCompatActivity {
 
         energySeekbar = (SeekBar) findViewById(R.id.energySeekbar);
 
+        energyTextview.setText(String.valueOf(energySeekbar.getProgress()));
+
         energySeekbar.setMax(10);
         //energySeekbar.setMin(1);
 
+        //When the seekbar is changed, change the textview value for the attribute
         energySeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 energyTextview.setText(String.valueOf(progress));
             }
-
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                Log.d("Energybar", "starttracking");
-            }
-
+            public void onStartTrackingTouch(SeekBar seekBar) {Log.d("Energybar", "starttracking");}
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.d("Energybar", "endtracking");
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) {Log.d("Energybar", "endtracking");}
         });
 
 

@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         minute = calendar.get(Calendar.MINUTE);
         timeEditText.setText( hour + ":" + minute);
 
-        //On click listner for the date edit text, allows it to be selectable
+        //On click listner for the date edit text, allows it to be selectable and creates a popout to select
         dateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
+        //When the time edit text is clicked, make a popout to select the time
         timeEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,13 +123,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*moodPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
 
-            }
-        });*/
-
+        //When the next button is selected, go to the health collection activity
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
