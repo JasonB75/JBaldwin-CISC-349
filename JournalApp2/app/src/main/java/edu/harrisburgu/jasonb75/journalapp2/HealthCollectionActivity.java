@@ -25,6 +25,9 @@ import com.google.gson.GsonBuilder;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
+
 public class HealthCollectionActivity extends AppCompatActivity {
 
     protected final String FILENAME = "edu_harrisburgu_jasonb75_journalapp";
@@ -187,8 +190,17 @@ public class HealthCollectionActivity extends AppCompatActivity {
         }
 
         try {
-            FileInputStream fin = openFileInput(file);
+            FileInputStream fin = openFileInput(FILENAME);
+            InputStreamReader InputRead= new InputStreamReader(fin);
+            char[] inputBuffer= new char[100];
+            String outputString="";
+            int charRead;
 
+            while ((charRead=InputRead.read(inputBuffer))>0) {
+                // char to string conversion
+                String readstring = String.copyValueOf(inputBuffer, 0, charRead);
+                outputString += readstring;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
