@@ -23,8 +23,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 
 public class HealthCollectionActivity extends AppCompatActivity {
+
+    protected final String FILENAME = "edu_harrisburgu_jasonb75_journalapp";
 
     private static JournalEntry journalEntry;
 
@@ -163,6 +166,7 @@ public class HealthCollectionActivity extends AppCompatActivity {
         });
 
     }
+
     public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
         ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
         image.compress(compressFormat, quality, byteArrayOS);
@@ -170,8 +174,24 @@ public class HealthCollectionActivity extends AppCompatActivity {
     }
 
     private void saveToStorage(JournalEntry entry){
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();;
         String saveString = gson.toJson(entry);
+        Log.d("gsonString", saveString);
+        try {
+            FileOutputStream fOut = openFileOutput(FILENAME,Context.MODE_PRIVATE);
+            fOut.write(saveString.getBytes());
+            fOut.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileInputStream fin = openFileInput(file);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void saveEntry(){
