@@ -6,5 +6,11 @@
     <string name="how_have_things_been">How have things been?</string>
     <string name="energy_level">Energy Level:</string>
     <string name="next_button"><![CDATA[Next ->]]></string>
+    <string name="sleep_quality">Sleep Quality:</string>
+    <string name="sleep_amount">Hours of sleep:</string>
+    <string name="social_battery">Social Battery:</string>
+    <string name="gut_feeling">Stomach/Gut feeling:</string>
+    <string name="eaten">Hours since eating:</string>
+    <string name="textview_default">0</string>
 
 </resources>

@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/energyTextView"
-                android:text="0"
+                android:text="@string/textview_default"
                 android:layout_marginLeft="@dimen/display_textview_left">
             </TextView>
             <SeekBar
@@ -41,8 +41,144 @@
                 android:layout_marginLeft="@dimen/display_seekview_left"
                 android:id="@+id/energySeekbar">
             </SeekBar>
+        </LinearLayout>
 
 
+        <!--Social Battery-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/health_layout_paddings">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/social_battery">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/socialTextView"
+                android:text="@string/textview_default"
+                android:layout_marginLeft="@dimen/display_textview_left">
+            </TextView>
+            <SeekBar
+                android:layout_width="@dimen/seekbar_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/display_seekview_left"
+                android:id="@+id/socialSeekbar">
+            </SeekBar>
+        </LinearLayout>
+
+        <!--Sleep Quality-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/health_layout_paddings">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sleep_quality">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sQualityTextView"
+                android:text="@string/textview_default"
+                android:layout_marginLeft="@dimen/display_textview_left">
+            </TextView>
+            <SeekBar
+                android:layout_width="@dimen/seekbar_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/display_seekview_left"
+                android:id="@+id/sQualitySeekbar">
+            </SeekBar>
+        </LinearLayout>
+
+        <!--Hours of sleep-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/health_layout_paddings">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sleep_amount">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sAmountTextView"
+                android:text="@string/textview_default"
+                android:layout_marginLeft="@dimen/display_textview_left">
+            </TextView>
+            <SeekBar
+                android:layout_width="@dimen/seekbar_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/display_seekview_left"
+                android:id="@+id/sAmountSeekbar">
+            </SeekBar>
+        </LinearLayout>
+
+
+
+        <!--Gut feeling-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/health_layout_paddings">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gut_feeling">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/stomachTextView"
+                android:text="@string/textview_default"
+                android:layout_marginLeft="@dimen/display_textview_left">
+            </TextView>
+            <SeekBar
+                android:layout_width="@dimen/seekbar_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/display_seekview_left"
+                android:id="@+id/stomachSeekbar">
+            </SeekBar>
+        </LinearLayout>
+
+        <!--Hours since eaten-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/health_layout_paddings">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eaten">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eatTextView"
+                android:text="@string/textview_default"
+                android:layout_marginLeft="@dimen/display_textview_left">
+            </TextView>
+            <SeekBar
+                android:layout_width="@dimen/seekbar_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/display_seekview_left"
+                android:id="@+id/eatSeekbar">
+            </SeekBar>
         </LinearLayout>
 
 
