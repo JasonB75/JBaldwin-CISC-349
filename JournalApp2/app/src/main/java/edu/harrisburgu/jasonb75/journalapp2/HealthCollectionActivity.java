@@ -34,10 +34,11 @@ public class HealthCollectionActivity extends AppCompatActivity {
 
         energySeekbar = (SeekBar) findViewById(R.id.energySeekbar);
 
-        energyTextview.setText(String.valueOf(energySeekbar.getProgress()));
 
         energySeekbar.setMax(10);
-        //energySeekbar.setMin(1);
+        energySeekbar.setMin(1);
+
+        energyTextview.setText(String.valueOf(energySeekbar.getProgress()));
 
         //When the seekbar is changed, change the textview value for the attribute
         energySeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
