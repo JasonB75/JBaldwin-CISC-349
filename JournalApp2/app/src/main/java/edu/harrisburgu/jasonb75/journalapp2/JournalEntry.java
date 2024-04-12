@@ -8,9 +8,13 @@ public class JournalEntry {
     private String date;
     private String time;
     private int energy;
-    private int eaten;
-    private String comments;
-    private Bitmap image;
+    private int socialBattery;
+    private int sleepQuality;
+    private int sleepAmount;
+    private int stomachFeeling;
+    private int lastEaten;
+    private String notes;
+    private String image;
 
     private int id; // THe id from the database
 
@@ -20,6 +24,37 @@ public class JournalEntry {
         setMood(mood);
         setDate(date);
         setTime(time);
+    }
+
+    //A function to set all the values not done in the contructor
+    //Intended for the save button used in HealthCollectionActivity
+    // instead of calling each setter in the activity
+    public void setNonInitialValues(int energy, int socialBattery, int sleepQuality, int sleepAmount,
+                               int stomachFeeling, int lastEaten, String notes, String img){
+        setEnergy(energy);
+        setSocialBattery(socialBattery);
+        setSleepQuality(sleepQuality);
+        setSleepAmount(sleepAmount);
+        setStomachFeeling(stomachFeeling);
+        setLastEaten(lastEaten);
+        setNotes(notes);
+        setImage(img);
+    }
+
+    public String outputEverything(){
+        String output = "";
+        output = output + ("Date: " + getDate());
+        output = output + ("\ntime : " + getTime());
+        output = output + ("\nmood: " + getMood());
+        output = output + ("\nenergy: " + getEnergy());
+        output = output + ("\nsocial battery: : " + getSocialBattery());
+        output = output + ("\nsleep quality: : " + getSleepQuality());
+        output = output + ("\nsleep amount: " + getSleepAmount());
+        output = output + ("\nStomach: " + getStomachFeeling());
+        output = output + ("\nHours since eated: " + getLastEaten());
+        output = output + ("\nnotes: " + getNotes());
+        output = output + ("\nimg string: " + getImage().substring(0, 20));
+        return output;
     }
 
 
@@ -55,27 +90,27 @@ public class JournalEntry {
         this.energy = energy;
     }
 
-    public int getEaten() {
-        return eaten;
+    public int getLastEaten() {
+        return lastEaten;
     }
 
-    public void setEaten(int eaten) {
-        this.eaten = eaten;
+    public void setLastEaten(int lastEaten) {
+        this.lastEaten = lastEaten;
     }
 
-    public String getComments() {
-        return comments;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
-    public Bitmap getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -93,5 +128,37 @@ public class JournalEntry {
 
     public void setInDB(boolean inDB) {
         this.inDB = inDB;
+    }
+
+    public int getSocialBattery() {
+        return socialBattery;
+    }
+
+    public void setSocialBattery(int socialBattery) {
+        this.socialBattery = socialBattery;
+    }
+
+    public int getSleepQuality() {
+        return sleepQuality;
+    }
+
+    public void setSleepQuality(int sleepQuality) {
+        this.sleepQuality = sleepQuality;
+    }
+
+    public int getSleepAmount() {
+        return sleepAmount;
+    }
+
+    public void setSleepAmount(int sleepAmount) {
+        this.sleepAmount = sleepAmount;
+    }
+
+    public int getStomachFeeling() {
+        return stomachFeeling;
+    }
+
+    public void setStomachFeeling(int stomachFeeling) {
+        this.stomachFeeling = stomachFeeling;
     }
 }

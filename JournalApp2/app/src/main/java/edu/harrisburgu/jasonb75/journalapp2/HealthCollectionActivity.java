@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.ByteArrayOutputStream;
 
 public class HealthCollectionActivity extends AppCompatActivity {
 
@@ -26,6 +33,8 @@ public class HealthCollectionActivity extends AppCompatActivity {
     private TextView energyTextview, sAmountTextview, sQualityTextview, socialBatteryTextview, stomachFeelingTextview, eatTextView;
 
     private Button uploadButton, deleteButton, saveButton;
+
+    private EditText notesText;
 
     private Context context;
     private ImageView imageView;
@@ -46,6 +55,9 @@ public class HealthCollectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_collection);
         context = this;
+
+        //The edittext used for adding notes to the entry
+        notesText = (EditText) findViewById(R.id.notesEditText);
 
         //The textviews that display the seekbar value
         energyTextview = (TextView) findViewById(R.id.energyTextView);
@@ -95,7 +107,16 @@ public class HealthCollectionActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.setImageResource(android.R.color.transparent);
+                imageView.setImageDrawable(null);
+            }
+        });
+
+        //The savebutton
+        saveButton = findViewById(R.id.finishEntryButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveEntry();
             }
         });
 
@@ -142,4 +163,42 @@ public class HealthCollectionActivity extends AppCompatActivity {
         });
 
     }
+    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        image.compress(compressFormat, quality, byteArrayOS);
+        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
+    private void saveToStorage(JournalEntry entry){
+        Gson gson = new GsonBuilder().create();
+        String saveString = gson.toJson(entry);
+    }
+
+    private void saveEntry(){
+        //Pulling all the values from the entry characteristics into variables
+        int energyLvl = Integer.parseInt(energyTextview.getText().toString());
+        int socialBattery = Integer.parseInt(socialBatteryTextview.getText().toString());
+        int sleepQuality = Integer.parseInt(sQualityTextview.getText().toString());
+        int sleepAmount = Integer.parseInt(sAmountTextview.getText().toString());
+        int stomachFeeling = Integer.parseInt(stomachFeelingTextview.getText().toString());
+        int hoursSinceEating = Integer.parseInt(eatTextView.getText().toString());
+        String notes = notesText.getText().toString();
+        String image = null; // inital value set at null
+
+        drawable = (BitmapDrawable) imageView.getDrawable();
+        if (drawable != null){
+            final Bitmap imgBitmap = drawable.getBitmap();
+            image = encodeToBase64(imgBitmap, Bitmap.CompressFormat.PNG, 100);
+        }
+        journalEntry.setNonInitialValues(energyLvl, socialBattery, sleepQuality, sleepAmount, stomachFeeling,
+                hoursSinceEating, notes, image);
+        Log.d("Entry Saved!!", journalEntry.outputEverything());
+
+
+        saveToStorage(journalEntry);
+
+        Toast.makeText(context, "Entry Saved!", Toast.LENGTH_SHORT).show();
+
+    }
+
 }
