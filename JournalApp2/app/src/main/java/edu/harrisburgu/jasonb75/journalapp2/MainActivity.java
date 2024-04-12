@@ -26,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
     private Button nextButton;
     private Context context;
 
+    //Variables for the date picker and edittext
+    private int year;
+    private int day;
+    private int month;
+
+    //VAriables for the timepicker and exittext
+    private int hour;
+    private int minute;
+
 
 
     @Override
@@ -43,21 +52,33 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
 
+        // on below line we are getting
+        // the instance of our calendar.
+        final Calendar calendar = Calendar.getInstance();
 
+        //Getting day, month, and year to set default value
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        String dateoutput = (day + "-" + (month + 1) + "-" + year);
+        dateEditText.setText(dateoutput);
+
+        //Getting hour and minute to set defult values
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        minute = calendar.get(Calendar.MINUTE);
+        timeEditText.setText( hour + ":" + minute);
 
         //On click listner for the date edit text, allows it to be selectable
         dateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // on below line we are getting
-                // the instance of our calendar.
-                final Calendar c = Calendar.getInstance();
+
 
                 // on below line we are getting
                 // our day, month and year.
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
 
                 // on below line we are creating a variable for date picker dialog.
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -68,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // on below line we are setting date to our edit text.
-                                dateEditText.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                String dateoutput = (dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                dateEditText.setText(dateoutput);
 
                             }
                         },
@@ -83,10 +105,8 @@ public class MainActivity extends AppCompatActivity {
         timeEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
+                hour = calendar.get(Calendar.HOUR_OF_DAY);
+                minute = calendar.get(Calendar.MINUTE);
 
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
