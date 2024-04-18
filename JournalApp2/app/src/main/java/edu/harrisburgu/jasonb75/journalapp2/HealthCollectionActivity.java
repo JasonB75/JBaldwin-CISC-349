@@ -240,9 +240,10 @@ public class HealthCollectionActivity extends AppCompatActivity {
 
     } */
 
+    //Formats and uploads data from the Journal Entry into a JSONObject, then uploads to the flask server via Volley
     private void uploadToServer(JournalEntry entry) {
-        JSONObject json = new JSONObject();
-        RequestQueue queue = Volley.newRequestQueue(context);
+        JSONObject json = new JSONObject(); // The object to be uploaded
+        RequestQueue queue = Volley.newRequestQueue(context); // The Volley queue to connect to the flask server
 
         try {
             json.put("mood", entry.getMood());
@@ -261,6 +262,7 @@ public class HealthCollectionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //The upload request
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, UPLOAD_URL, json,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -305,6 +307,7 @@ public class HealthCollectionActivity extends AppCompatActivity {
         //Will eventually be used to save to storage
         //saveToStorage(journalEntry);
 
+        //Uploads to the flask server
         uploadToServer(journalEntry);
 
         Toast.makeText(context, "Entry Saved!", Toast.LENGTH_SHORT).show();
