@@ -135,11 +135,15 @@ public class HealthCollectionActivity extends AppCompatActivity {
         });
 
         //The savebutton
+        //Saves the entry to the server then starts the intent to the viewEntriesActivity
         saveButton = findViewById(R.id.finishEntryButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveEntry();
+                Intent i = ViewEntriesActivity.newIntent(context);
+                // at last we are starting our activity.
+                context.startActivity(i);
             }
         });
 
@@ -273,6 +277,8 @@ public class HealthCollectionActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    //Pulls the data from all the items on the screen, saves them into the journal entry started at the begining of this activity
+    //Then saves it to the server
     private void saveEntry(){
         //Pulling all the values from the entry characteristics into variables
         int energyLvl = Integer.parseInt(energyTextview.getText().toString());
@@ -284,17 +290,21 @@ public class HealthCollectionActivity extends AppCompatActivity {
         String notes = notesText.getText().toString();
         String image = null; // inital value set at null
 
+        //Pull the image from the imgView, and convert it into a string format
         drawable = (BitmapDrawable) imageView.getDrawable();
         if (drawable != null){
             final Bitmap imgBitmap = drawable.getBitmap();
             image = encodeToBase64(imgBitmap, Bitmap.CompressFormat.PNG, 100);
         }
+
+        //Save all the data pulled from the screen to the jounralEntry via the class method
         journalEntry.setNonInitialValues(energyLvl, socialBattery, sleepQuality, sleepAmount, stomachFeeling,
                 hoursSinceEating, notes, image);
         Log.d("Entry Saved!!", journalEntry.outputEverything());
 
-
+        //Will eventually be used to save to storage
         //saveToStorage(journalEntry);
+
         uploadToServer(journalEntry);
 
         Toast.makeText(context, "Entry Saved!", Toast.LENGTH_SHORT).show();
