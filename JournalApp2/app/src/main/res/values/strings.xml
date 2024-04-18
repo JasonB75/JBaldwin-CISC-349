@@ -17,5 +17,6 @@
     <string name="upload_image">Upload Image</string>
     <string name="delete_image">Delete Image</string>
     <string name="save_entry">Save Entry!</string>
+    <string name="new_entry_button">Add New Entry</string>
 
 </resources>

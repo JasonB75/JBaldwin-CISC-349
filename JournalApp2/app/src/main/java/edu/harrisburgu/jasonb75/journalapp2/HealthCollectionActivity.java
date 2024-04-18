@@ -19,18 +19,33 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.FileInputStream;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class HealthCollectionActivity extends AppCompatActivity {
 
     protected final String FILENAME = "edu_harrisburgu_jasonb75_journalapp";
+
+    protected final String UPLOAD_URL = "http://10.0.0.146:5000/add";
 
     private static JournalEntry journalEntry;
 
@@ -45,6 +60,8 @@ public class HealthCollectionActivity extends AppCompatActivity {
     private Context context;
     private ImageView imageView;
     private BitmapDrawable drawable;
+
+
 
     // constant to compare
     // the activity result code
@@ -176,12 +193,40 @@ public class HealthCollectionActivity extends AppCompatActivity {
         return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
     }
 
-    private void saveToStorage(JournalEntry entry){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();;
-        String saveString = gson.toJson(entry);
+    /*private void saveToStorage(JournalEntry entry){
+        ArrayList<JournalEntry> entryArrayList = new ArrayList<>();
+        String fileInputString = "";
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        try
+        {
+            FileInputStream fin = openFileInput(FILENAME);
+            int a;
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1)
+            {
+                temp.append((char)a);
+            }
+
+            // setting text from the file.
+            fileInputString = temp.toString();
+            fin.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        Type listType = new TypeToken<ArrayList<JournalEntry>>(){}.getType();
+        entryArrayList = gson.fromJson(fileInputString, listType);
+        Log.d("read from internal", fileInputString);
+
+        entryArrayList.add(entry);
+
+        String saveString = gson.toJson(entryArrayList);
         Log.d("gsonString", saveString);
         try {
-            FileOutputStream fOut = openFileOutput(FILENAME,Context.MODE_PRIVATE);
+            FileOutputStream fOut = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             fOut.write(saveString.getBytes());
             fOut.close();
 
@@ -189,21 +234,43 @@ public class HealthCollectionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try {
-            FileInputStream fin = openFileInput(FILENAME);
-            InputStreamReader InputRead= new InputStreamReader(fin);
-            char[] inputBuffer= new char[100];
-            String outputString="";
-            int charRead;
+    } */
 
-            while ((charRead=InputRead.read(inputBuffer))>0) {
-                // char to string conversion
-                String readstring = String.copyValueOf(inputBuffer, 0, charRead);
-                outputString += readstring;
-            }
-        } catch (Exception e) {
+    private void uploadToServer(JournalEntry entry) {
+        JSONObject json = new JSONObject();
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        try {
+            json.put("mood", entry.getMood());
+            json.put("date", entry.getDate());
+            json.put("time", entry.getTime());
+            json.put("energy", entry.getEnergy());
+            json.put("socialBattery", entry.getSocialBattery());
+            json.put("sleepQuality", entry.getSleepQuality());
+            json.put("sleepAmount", entry.getSleepAmount());
+            json.put("stomachFeeling", entry.getStomachFeeling());
+            json.put("lastEaten", entry.getLastEaten());
+            json.put("notes", entry.getNotes());
+            json.put("image", entry.getImage());
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, UPLOAD_URL, json,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("Entry Upload! ", "Response: " + response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Hello", error.getMessage());
+            }
+        });
+
+        queue.add(jsonObjectRequest);
     }
 
     private void saveEntry(){
@@ -227,7 +294,8 @@ public class HealthCollectionActivity extends AppCompatActivity {
         Log.d("Entry Saved!!", journalEntry.outputEverything());
 
 
-        saveToStorage(journalEntry);
+        //saveToStorage(journalEntry);
+        uploadToServer(journalEntry);
 
         Toast.makeText(context, "Entry Saved!", Toast.LENGTH_SHORT).show();
 

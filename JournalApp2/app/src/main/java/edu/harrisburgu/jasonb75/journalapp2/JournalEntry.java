@@ -2,6 +2,8 @@ package edu.harrisburgu.jasonb75.journalapp2;
 
 import android.graphics.Bitmap;
 
+import org.json.JSONObject;
+
 public class JournalEntry {
 
     private int mood;
@@ -41,6 +43,10 @@ public class JournalEntry {
         setImage(img);
     }
 
+    public void setFromJson(JSONObject jsonObject){
+
+    }
+
     public String outputEverything(){
         String output = "";
         output = output + ("Date: " + getDate());
@@ -56,6 +62,8 @@ public class JournalEntry {
         output = output + ("\nimg string: " + getImage().substring(0, 20));
         return output;
     }
+
+    public
 
 
     public int getMood() {
