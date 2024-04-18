@@ -2,6 +2,7 @@ package edu.harrisburgu.jasonb75.journalapp2;
 
 import android.graphics.Bitmap;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JournalEntry {
@@ -44,6 +45,20 @@ public class JournalEntry {
     }
 
     public void setFromJson(JSONObject jsonObject){
+        try{
+        setEnergy(jsonObject.getInt("energy"));
+        setSocialBattery(jsonObject.getInt("socialBattery"));
+        setSleepQuality(jsonObject.getInt("sleepQuality"));
+        setSleepAmount(jsonObject.getInt("sleepAmount"));
+        setStomachFeeling(jsonObject.getInt("stomachFeeling"));
+        setLastEaten(jsonObject.getInt("lastEaten"));
+        setNotes(jsonObject.getString("notes"));
+        setImage(jsonObject.getString("image"));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+
 
     }
 
@@ -63,7 +78,6 @@ public class JournalEntry {
         return output;
     }
 
-    public
 
 
     public int getMood() {
