@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -28,7 +30,9 @@ public class ViewEntriesActivity extends AppCompatActivity {
 
     protected final String SERVER_URL = "http://10.0.0.146:5000/get_all ";
     private ArrayList<JournalEntry> entryArrayList = new ArrayList<JournalEntry>();;
-    private 
+    private Button newEntryButton;
+
+    Context context;
 
 
 
@@ -37,13 +41,14 @@ public class ViewEntriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_entries);
 
+        context = this;
+
         RequestQueue queue = Volley.newRequestQueue(this);
 
         // Create the adapter to convert the array to views
         EntriesLIstAdapter adapter = new EntriesLIstAdapter(this, entryArrayList); // The adapter for the list view, that has the array of entries
 
-
-
+        //Start the request to pull all entries from the flask server
         JsonArrayRequest jsonArrayRequest =
                 new JsonArrayRequest(Request.Method.GET,
                         SERVER_URL, null,
@@ -53,21 +58,21 @@ public class ViewEntriesActivity extends AppCompatActivity {
                             public void onResponse(JSONArray response) {
                                 for (int i = 0; i < response.length(); i++){
                                     try{
+                                        //GEt the JSon object from the response
                                         JSONObject data = response.getJSONObject(i);
 
+                                        //Pull out mood, date, and time to create the jounral entry
                                         int mood = data.getInt("mood");
                                         String date = data.getString("date");
                                         String time = data.getString("time");
 
+                                        //Create the entry, and use a method to load the other values from the JSON
                                         JournalEntry entry = new JournalEntry(mood, date, time);
                                         entry.setFromJson(data);
 
-                                        //byte[] pictureBytes = Base64.decode(pictureString, Base64.DEFAULT);
-
-                                        //Bitmap picture = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
-
                                         Log.d("ViewEntriesActivity - New from server: ", entry.outputEverything());
 
+                                        //Add it to the arraylist to be passed to the list adapter
                                         entryArrayList.add(entry);
 
                                     } catch (JSONException e){
@@ -90,6 +95,15 @@ public class ViewEntriesActivity extends AppCompatActivity {
                 });
 
         queue.add(jsonArrayRequest);
+
+        newEntryButton = findViewById(R.id.newEntryButton);
+        newEntryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
 
     }
