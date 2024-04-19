@@ -1,6 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/item_entry_bottomMargin">
+
+    <!--The header of sorts | Mood, date, time-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/item_entry_header_bottommargin">
+
+        <!-- Mood textview pair-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_entry_mood"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/mood_textview">
+        </TextView>
+
+        <!-- Date textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00-00-0000"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/date_textview">
+        </TextView>
+
+        <!-- Time textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/time_textview">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Social Battery textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/socialBatt_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/socialBatt_textview">
+        </TextView>
+
+        <!-- Sleep quality textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sleepQuality_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/sleepQuality_textview">
+        </TextView>
+
+        <!-- Sleep amount textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sleepAmount_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/sleepAmount_textview">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Energy textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/energy_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/energy_textview">
+        </TextView>
+
+
+        <!-- Stomach feeling Battery textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stomachFeeling_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/stomachFeeling_textview">
+        </TextView>
+
+        <!-- Hours since  eating textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lastEaten_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin"
+            android:id="@+id/lastEaten_textview">
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Notes Battery textview pair-->
+        <TextView
+            android:layout_marginStart="@dimen/date_time_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notes_textview"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginEnd="@dimen/item_entry_leftMargin">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="notes"
+            android:textSize="@dimen/item_body_text_size"
+            android:layout_marginStart="@dimen/item_entry_leftMargin"
+            android:id="@+id/notes_textview">
+        </TextView>
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="@dimen/img_margine_left"
+        android:scaleType="centerCrop" />
 
 </LinearLayout>

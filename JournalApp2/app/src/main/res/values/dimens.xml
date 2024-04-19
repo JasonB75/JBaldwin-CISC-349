@@ -11,4 +11,11 @@
     <dimen name="img_linearlayout_top_margin">15dp</dimen>
     <dimen name="notes_linearlayout_top_margin">15dp</dimen>
     <dimen name="subheader_text_size">20dp</dimen>
+    <dimen name="item_body_text_size">14sp</dimen>
+    <dimen name="item_entry_leftMargin">4sp</dimen>
+    <dimen name="date_time_left_margin">20sp</dimen>
+    <dimen name="notes_left_margin">10sp</dimen>
+    <dimen name="img_margine_left">15sp</dimen>
+    <dimen name="item_entry_bottomMargin">20sp</dimen>
+    <dimen name="item_entry_header_bottommargin">5sp</dimen>
 </resources>

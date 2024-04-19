@@ -41,15 +41,15 @@ def add():
 
 # Select All users
 
-@app.route('/all', methods=['GET'])
+@app.route('/get_all', methods=['GET'])
 def all():
     collection = db["journalEntries"] 
-    customers = list(collection.find())
+    entries = list(collection.find())
     # we need to convert _id to str.
-    return json.dumps(customers, default=str)
+    return json.dumps(entries, default=str)
     
     
 
 
 if __name__ == "__main__":
-    app.run("0.0.0.0",port=5000)
+    app.run("0.0.0.0",port=5000, debug=True)

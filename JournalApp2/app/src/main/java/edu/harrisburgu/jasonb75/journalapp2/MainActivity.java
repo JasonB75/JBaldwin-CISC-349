@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private final int MOODMIN = 1;
     private EditText dateEditText, timeEditText;
     private NumberPicker moodPicker;
-    private Button nextButton;
+    private Button nextButton, viewEntriesButton;
     private Context context;
 
     //Variables for the date picker and edittext
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         timeEditText = findViewById(R.id.idEdtTime);
         moodPicker = findViewById(R.id.mood_picker);
         nextButton = findViewById(R.id.next_button);
+        viewEntriesButton = findViewById(R.id.view_entries_button);
 
         moodPicker.setMaxValue(MOODMAX);
         moodPicker.setMinValue(MOODMIN);
@@ -136,6 +137,15 @@ public class MainActivity extends AppCompatActivity {
 
                 // at last we are starting our activity.
                 context.startActivity(i);
+            }
+        });
+
+        viewEntriesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //intend to view entries activity
+                Intent i = new Intent(context,ViewEntriesActivity.class);
+                startActivity(i);
             }
         });
     }

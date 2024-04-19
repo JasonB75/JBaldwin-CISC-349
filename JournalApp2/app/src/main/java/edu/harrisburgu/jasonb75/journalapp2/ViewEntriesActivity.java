@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,12 +28,8 @@ public class ViewEntriesActivity extends AppCompatActivity {
 
     protected final String SERVER_URL = "http://10.0.0.146:5000/get_all ";
     private ArrayList<JournalEntry> entryArrayList = new ArrayList<JournalEntry>();;
+    private 
 
-
-    public static Intent newIntent(Context packageContext) {
-        Intent i = new Intent(packageContext, HealthCollectionActivity.class);
-        return i;
-    }
 
 
     @Override
@@ -41,7 +38,10 @@ public class ViewEntriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_entries);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        queue.start();
+
+        // Create the adapter to convert the array to views
+        EntriesLIstAdapter adapter = new EntriesLIstAdapter(this, entryArrayList); // The adapter for the list view, that has the array of entries
+
 
 
         JsonArrayRequest jsonArrayRequest =
@@ -75,8 +75,10 @@ public class ViewEntriesActivity extends AppCompatActivity {
                                     }
                                 }
                                 Log.d("ImageGridView Activity", "results size: " + entryArrayList.size());
-                                //imageRVAdapter.notifyDataSetChanged();
-                                /////////////////////////////////////////////////////////////view stuffs
+
+                                // Attach the adapter to a ListView
+                                ListView listView = (ListView) findViewById(R.id.entryListView);
+                                listView.setAdapter(adapter);
 
 
                             }

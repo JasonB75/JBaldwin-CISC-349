@@ -18,5 +18,16 @@
     <string name="delete_image">Delete Image</string>
     <string name="save_entry">Save Entry!</string>
     <string name="new_entry_button">Add New Entry</string>
+    <string name="view_entries">View Entries</string>
+    <string name="item_entry_mood">"Mood: "</string>
+    <string name="date_textview">"Date: "</string>
+    <string name="time_textview">"Time: "</string>
+    <string name="energy_textview">"Energy: "</string>
+    <string name="socialBatt_textview">Social Battery Lvl:</string>
+    <string name="sleepAmount_textview">"Hours of Sleep: "</string>
+    <string name="sleepQuality_textview">"Sleep Quality: "</string>
+    <string name="stomachFeeling_textview">"Stomach Feeling: "</string>
+    <string name="lastEaten_textview">"Hours since Eaten: "</string>
+    <string name="notes_textview">"Notes: "</string>
 
 </resources>

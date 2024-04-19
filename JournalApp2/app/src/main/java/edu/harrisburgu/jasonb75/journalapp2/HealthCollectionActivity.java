@@ -141,9 +141,6 @@ public class HealthCollectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveEntry();
-                Intent i = ViewEntriesActivity.newIntent(context);
-                // at last we are starting our activity.
-                context.startActivity(i);
             }
         });
 
@@ -197,6 +194,11 @@ public class HealthCollectionActivity extends AppCompatActivity {
         return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
     }
 
+    private void goToViewEntriesActivity(){
+        Intent i = new Intent(context,ViewEntriesActivity.class);
+        startActivity(i);
+
+    }
     /*private void saveToStorage(JournalEntry entry){
         ArrayList<JournalEntry> entryArrayList = new ArrayList<>();
         String fileInputString = "";
@@ -268,11 +270,15 @@ public class HealthCollectionActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("Entry Upload! ", "Response: " + response.toString());
+                        //Toast.makeText(context, "Entry Saved!", Toast.LENGTH_SHORT).show();
+                        goToViewEntriesActivity();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Hello", error.getMessage());
+                if (error.getMessage() != null){
+                    Log.d("Hello", error.getMessage());
+                }
             }
         });
 
@@ -310,7 +316,7 @@ public class HealthCollectionActivity extends AppCompatActivity {
         //Uploads to the flask server
         uploadToServer(journalEntry);
 
-        Toast.makeText(context, "Entry Saved!", Toast.LENGTH_SHORT).show();
+
 
     }
 

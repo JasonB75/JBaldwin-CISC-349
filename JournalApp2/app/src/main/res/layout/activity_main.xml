@@ -74,6 +74,14 @@
             android:text="@string/next_button">
         </Button>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_entries_button"
+            android:text="@string/view_entries">
+        </Button>
+
+
 
 
     </LinearLayout>
