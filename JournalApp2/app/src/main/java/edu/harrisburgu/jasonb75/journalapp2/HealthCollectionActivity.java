@@ -242,6 +242,7 @@ public class HealthCollectionActivity extends AppCompatActivity {
 
     } */
 
+
     //Formats and uploads data from the Journal Entry into a JSONObject, then uploads to the flask server via Volley
     private void uploadToServer(JournalEntry entry) {
         JSONObject json = new JSONObject(); // The object to be uploaded
@@ -303,6 +304,8 @@ public class HealthCollectionActivity extends AppCompatActivity {
         if (drawable != null){
             final Bitmap imgBitmap = drawable.getBitmap();
             image = encodeToBase64(imgBitmap, Bitmap.CompressFormat.PNG, 100);
+        } else if (drawable == null) {
+            image = " ";
         }
 
         //Save all the data pulled from the screen to the jounralEntry via the class method

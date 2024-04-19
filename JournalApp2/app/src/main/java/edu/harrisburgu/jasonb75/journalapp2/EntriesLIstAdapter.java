@@ -67,9 +67,11 @@ public class EntriesLIstAdapter extends BaseAdapter {
         eatTextView.setText(String.valueOf(arrayList.get(position).getLastEaten()));
         notesTextview.setText(arrayList.get(position).getNotes());
 
-        byte[] pictureBytes = Base64.decode(arrayList.get(position).getImage(), Base64.DEFAULT);
-        Bitmap picture = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
-        imageView.setImageBitmap(picture);
+        if (!arrayList.get(position).getImage().equals(" ")) {
+            byte[] pictureBytes = Base64.decode(arrayList.get(position).getImage(), Base64.DEFAULT);
+            Bitmap picture = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
+            imageView.setImageBitmap(picture);
+        }
 
         return convertView;
     }
