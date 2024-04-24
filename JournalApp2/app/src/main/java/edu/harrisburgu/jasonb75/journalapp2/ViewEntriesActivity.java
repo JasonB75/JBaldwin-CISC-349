@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class ViewEntriesActivity extends AppCompatActivity {
 
-    protected final String SERVER_URL = "http://10.0.0.146:5000/get_all ";
+    protected final String SERVER_URL = "http://10.0.0.146:5000/get_all "; // THe url of the flask server
     private ArrayList<JournalEntry> entryArrayList = new ArrayList<JournalEntry>();;
     private Button newEntryButton;
 
@@ -42,6 +42,17 @@ public class ViewEntriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_entries);
 
         context = this;
+
+        newEntryButton = findViewById(R.id.newEntryButton);
+        newEntryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -96,14 +107,7 @@ public class ViewEntriesActivity extends AppCompatActivity {
 
         queue.add(jsonArrayRequest);
 
-        newEntryButton = findViewById(R.id.newEntryButton);
-        newEntryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, MainActivity.class);
-                startActivity(i);
-            }
-        });
+
 
 
     }

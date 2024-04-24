@@ -61,6 +61,8 @@ public class HealthCollectionActivity extends AppCompatActivity {
     private ImageView imageView;
     private BitmapDrawable drawable;
 
+    private final  int IMG_BACKUP_QUALITY = 50;
+
 
 
     // constant to compare
@@ -303,7 +305,7 @@ public class HealthCollectionActivity extends AppCompatActivity {
         drawable = (BitmapDrawable) imageView.getDrawable();
         if (drawable != null){
             final Bitmap imgBitmap = drawable.getBitmap();
-            image = encodeToBase64(imgBitmap, Bitmap.CompressFormat.PNG, 100);
+            image = encodeToBase64(imgBitmap, Bitmap.CompressFormat.PNG, IMG_BACKUP_QUALITY);
         } else if (drawable == null) {
             image = " ";
         }
